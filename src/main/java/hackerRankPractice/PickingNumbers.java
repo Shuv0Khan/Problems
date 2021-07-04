@@ -1,6 +1,7 @@
 package hackerRankPractice;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,51 +19,25 @@ public class PickingNumbers {
 
     public static int pickingNumbers(List<Integer> a) {
         // Write your code here
-        Collections.sort(a);
-
-        /*
-        the sliding window algorithm in PickingSubsequentNumbers.pickingNumbers(a)
-        modified and optimized as the list is sorted.
-
-        int maxLen = 0;
-        int minInWindow = a.get(0);
-        int maxInWindow = a.get(0);
-        int start = 0;
-        int nextStart = 1;
-        int i = 1;
-
-        for (; i < a.size(); i++) {
-            int current = a.get(i);
-            if (current > maxInWindow) {
-                maxInWindow = current;
-            } else if (current < minInWindow) {
-                minInWindow = current;
+        int max = Integer.MIN_VALUE;
+        for (Integer i : a) {
+            if (i > max) {
+                max = i;
             }
-
-            // TODO: 04/07/2021 when subtracting note the possible signs of both args.
-            if (Math.abs(minInWindow - maxInWindow) > 1) {
-                int len = i - start;
-                if (len > maxLen) {
-                    maxLen = len;
-                }
-
-                start = nextStart;
-                minInWindow = a.get(start);
-                maxInWindow = current;
-                continue;
-            }
-
-            if (a.get(nextStart) != current) {
-                nextStart = i;
-            }
-
+        }
+        int [] counts = new int[max + 1];
+        for (Integer i : a) {
+            counts[i]++;
         }
 
-        if (maxLen < (i - start)) {
-            maxLen = i - start;
+        int maxLen = Integer.MIN_VALUE;
+        for (int i = 1; i < counts.length; i++) {
+            int len = counts[i - 1] + counts[i];
+            if (len > maxLen) {
+                maxLen = len;
+            }
         }
-        return maxLen;*/
 
-        return PickingSubsequentNumbers.pickingNumbers(a);
+        return maxLen;
     }
 }
