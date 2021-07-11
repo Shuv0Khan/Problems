@@ -1,6 +1,8 @@
 package hackerRankPractice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,33 +23,26 @@ public class OrganizingContainersOfBalls {
     public static String organizingContainers(List<List<Integer>> container) {
         // Write your code here
         int n = container.size();
-        int[] containerBall = new int[n];
-        for (int i = 0; i < n; i++) containerBall[i] = -1;
+        int[] ballCount = new int[n];
+        int[] capacityCount = new int[n];
 
-        for (int ball = 0; ball < n; ball++) {
-            boolean accumulated = false;
-            for (int cont = 0; cont < n; cont++) {
-                if (containerBall[cont] > -1) {
-                    continue;
-                }
-                int rowSum = 0;
-                for (Integer b : container.get(cont)) {
-                    rowSum += b;
-                }
-                int colSum = 0;
-                for (int i = 0; i < n; i++) {
-                    colSum += container.get(i).get(ball);
-                }
-                if (rowSum == colSum) {
-                    containerBall[cont] = ball;
-                    accumulated = true;
-                    break;
-                }
+        for (int col = 0; col < n; col++) {
+            for (int row = 0; row < n; row++) {
+                int m = container.get(row).get(col);
+                ballCount[col] += m;
+                capacityCount[row] += m;
             }
-            if (!accumulated) {
+        }
+
+        Arrays.sort(ballCount);
+        Arrays.sort(capacityCount);
+
+        for (int i = 0; i < n; i++) {
+            if (ballCount[i] != capacityCount[i]) {
                 return "Impossible";
             }
         }
+
         return "Possible";
 
     }

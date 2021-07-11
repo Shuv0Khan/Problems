@@ -85,7 +85,7 @@ class OrganizingContainersOfBallsTest {
         Assertions.assertEquals("Impossible", OrganizingContainersOfBalls.organizingContainers(container));
     }
 
-    @Test
+    /*@Test
     @DisplayName("Test case generation")
     void testCaseGeneration() {
         int n = (int)(Math.random() * 10);
@@ -96,5 +96,5 @@ class OrganizingContainersOfBallsTest {
             }
             System.out.println("");
         }
-    }
+    }*/
 }
