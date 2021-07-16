@@ -18,6 +18,7 @@ class TheTimeInWordsTest {
     void testCasesGiven() {
         Assertions.assertEquals("five o' clock", TheTimeInWords.timeInWords(5, 0));
         Assertions.assertEquals("one minute past five", TheTimeInWords.timeInWords(5, 1));
+        Assertions.assertEquals("two minutes past five", TheTimeInWords.timeInWords(5, 2));
         Assertions.assertEquals("ten minutes past five", TheTimeInWords.timeInWords(5, 10));
         Assertions.assertEquals("twelve minutes past five", TheTimeInWords.timeInWords(5, 12));
         Assertions.assertEquals("quarter past five", TheTimeInWords.timeInWords(5, 15));
