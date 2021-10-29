@@ -18,7 +18,7 @@ void $METHOD_NAME$() {
    |------|------------|---------------|-----------|
    | TEST_NAME | | "Test name" | |
    | METHOD_NAME| camelCase(TEST_NAME)| "methodName"| |
-   |BODY| | "org.junit.jupiter.api.Assertions.fail(\"Not Implemented\");"|x|
+   |BODY| | "org.junit.jupiter.api.Assertions.fail(\\"Not Implemented\\");"|x|
    
 5. Set "Expand with - Default"
 6. Mark all three options.
