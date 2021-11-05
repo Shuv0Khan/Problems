@@ -1,5 +1,6 @@
-package gitTheAlgos;
+package gitTheAlgos.math;
 
+import gitTheAlgos.math.AbsoluteMinMax;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

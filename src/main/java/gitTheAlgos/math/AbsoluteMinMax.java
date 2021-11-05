@@ -1,4 +1,4 @@
-package gitTheAlgos;
+package gitTheAlgos.math;
 
 /**
  * description:

@@ -1,4 +1,4 @@
-package gitTheAlgos;
+package gitTheAlgos.math;
 
 /**
  * <p>In number theory, the aliquot sum s(n) of a positive integer n
