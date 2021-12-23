@@ -1,10 +1,14 @@
 package gitTheAlgos.math;
 
 public class DeterminantOfMatrix {
-    /*
+    /**
      * shuvo - 2021-12-22, Wed, 14:25
      * Upper triangular matrix way of determinant calculation
-     **/
+     *
+     * Learning -
+     * 1. Upper and Lower triangular matrices. A = LU. LU Decomposition, Bareiss Algorithm, Laplace Expansion.
+     * 2. Row operation - if for a matrix A, we do -> R3 = a.R3 - b.R1 to get matrix B then, det(A) = 1/a det(B)
+     */
     public static double upperTriangularDet(double mat[][]) {
         if (mat.length != mat[0].length) {
             /*
