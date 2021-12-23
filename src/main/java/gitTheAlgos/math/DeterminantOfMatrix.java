@@ -5,7 +5,7 @@ public class DeterminantOfMatrix {
      * shuvo - 2021-12-22, Wed, 14:25
      * Upper triangular matrix way of determinant calculation
      **/
-    public static int upperTriangularDet(int mat[][]) {
+    public static double upperTriangularDet(double mat[][]) {
         if (mat.length != mat[0].length) {
             /*
              * shuvo - 2021-12-22, Wed, 14:27
@@ -13,8 +13,8 @@ public class DeterminantOfMatrix {
              **/
             return -1;
         }
-        int det = 1;
-        int multiplier = 1;
+        double det = 1;
+        double multiplier = 1;
 
         for (int col = 0, n = mat.length; col < n - 1; col++) {
             if (mat[col][col] == 0) {
@@ -54,8 +54,8 @@ public class DeterminantOfMatrix {
                      **/
                     continue;
                 }
-                int multRow1 = mat[col][col];
-                int multRow2 = mat[row][col];
+                double multRow1 = mat[col][col];
+                double multRow2 = mat[row][col];
                 multiplier *= multRow1;
 
                 for (int i = 0; i < n; i++) {
@@ -78,12 +78,51 @@ public class DeterminantOfMatrix {
         return det/multiplier;
     }
 
-    private static void swapRow(int[][] mat, int row1, int row2) {
+    private static void swapRow(double[][] mat, int row1, int row2) {
         for (int i = 0; i < mat.length; i++) {
-            int t = mat[row1][i];
+            double t = mat[row1][i];
             mat[row1][i] = mat[row2][i];
             mat[row2][i] = t;
         }
     }
 
+    /**
+     * source - http://sandsduchon.org/duchon/math/determinantJava.html
+     * @param a - matrix
+     * @return determinant
+     */
+    public static double getDecDet (double [][] a) {
+        int n = a.length - 1;
+        if (n < 0) return 0;
+        double M [][][] = new double [n+1][][];
+
+        M[n] = a;  // init first, largest, M to a
+
+        // create working arrays
+        for (int i = 0; i < n; i++)
+            M[i] = new double [i+1][i+1];
+
+        return getDecDet (M, n);
+    } // end method getDecDet double [][] parameter
+
+    private static double getDecDet (double [][][] M, int m) {
+        if (m == 0) return M[0][0][0];
+        int e = 1;
+
+        // init subarray to upper left mxm submatrix
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < m; j++)
+                M[m-1][i][j] = M[m][i][j];
+        double sum = M[m][m][m] * getDecDet (M, m-1);
+
+        // walk through rest of rows of M
+        for (int i = m-1; i >= 0; i--) {
+            for (int j = 0; j < m; j++)
+                M[m-1][i][j] = M[m][i+1][j];
+            e = -e;
+            sum += e * M[m][i][m] * getDecDet (M, m-1);
+        } // end for each row of matrix
+
+        return sum;
+    } // end getDecDet double [][][], int
 }
