@@ -7,7 +7,7 @@ import java.util.function.BiFunction;
  * https://en.wikipedia.org/wiki/Euler_method
  *
  * Learning -
- *
+ * 1. Using functions in java
  */
 public class EulerMethod {
     public static ArrayList<Double> euler(double t0, double tn, double h, double y0, BiFunction<Double, Double, Double> yn) {
