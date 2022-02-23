@@ -21,6 +21,10 @@ import java.util.HashMap;
  *
  * problem 2:
  *      1. Integer.MIN_VALUE doesn't become positive even if we do Math.abs
+ *
+ * problem 3:
+ *      1. Sometimes the solution is right around the corner. All it needs
+ *      is a little push outside the box.
  */
 public class ArrayProblems {
     /**
