@@ -3,6 +3,8 @@ package common25;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayProblemsTest {
@@ -123,5 +125,18 @@ class ArrayProblemsTest {
         assertTrue(ArrayProblems.sumEqualToTargetReminder(new int[]{-1, -2}, -3));
         assertTrue(ArrayProblems.sumEqualToTargetReminder(new int[]{1, 2, 0, 3}, 3));
         assertTrue(ArrayProblems.sumEqualToTargetReminder(new int[]{1, 2, 1, 4}, 2));
+    }
+
+
+    @Test
+    @DisplayName("set matrix row col to zero basic test")
+    void setMatrixRowColToZeroBasicTest() {
+        int[][] mat = new int[][]{{1,2}, {2,3}, {1,0}};
+        int[][] retMat = new int[][]{{1,0}, {2,0}, {0,0}};
+        assertTrue(Arrays.deepEquals(retMat, ArrayProblems.setToZero(mat)));
+
+        mat = new int[][]{{1, 2, 3}, {2, 0, 3}, {0, 1, 2}};
+        retMat = new int[][]{{0, 0, 3}, {0, 0, 0}, {0, 0, 0}};
+        assertTrue(Arrays.deepEquals(retMat, ArrayProblems.setToZero(mat)));
     }
 }

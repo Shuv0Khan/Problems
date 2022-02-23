@@ -228,4 +228,55 @@ public class ArrayProblems {
         return false;
     }
 
+    /**
+     * <b>3. Set columns and rows as zeroes
+     * <br>
+     * Problem Statement:</b> Given a two-dimensional array,
+     * if any element within is zero, make its whole
+     * row and column zero. Consider the matrix below.
+     *
+     * @param mat the 2d matrix
+     * @return int[][] matrix with row+column set to zero
+     */
+    public static int[][] setToZero(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+        int isColZero = -1;
+
+        for (int i = 0; i < row; i++) {
+            if (mat[i][0] == 0) {
+                isColZero = 0;
+            }
+            for (int j = 1; j < col; j++) {
+                if (mat[i][j] == 0) {
+                    mat[i][0] = 0;
+                    mat[0][j] = 0;
+                }
+            }
+        }
+
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                if (mat[i][0] == 0 || mat[0][j] == 0) {
+                    mat[i][j] = 0;
+                }
+            }
+        }
+        // first use mat[0][0] to set row to zero
+        // if done after col set to zero, then it will cause the row to also be zero
+        if (mat[0][0] == 0) {
+            for (int j = 0; j < col; j++) {
+                mat[0][j] = 0;
+            }
+        }
+
+        if (isColZero == 0) {
+            for (int i = 0; i < row; i++) {
+                mat[i][0] = 0;
+            }
+        }
+
+        return mat;
+    }
+
 }
