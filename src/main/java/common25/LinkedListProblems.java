@@ -60,11 +60,59 @@ public class LinkedListProblems {
 
         return ret;
     }
+
+    /**
+     * <b>5. Copy linked list with arbitrary pointer
+     * <br>
+     * Problem Statement:</b> You are given a linked list where
+     * the node has two pointers. The first is the regular next pointer.
+     * The second pointer is called arbitrary_pointer,
+     * and it can point to any node in the linked list.
+     *
+     * Here, deep copy means that any operations on the original list
+     * (inserting, modifying, and removing) should not affect the copied list.
+     *
+     * @param head the linked list to copy
+     * @return head of the copied link list
+     */
+    public static Node deepCopyLinkedList(Node head) {
+        for(Node h = head; h != null;) {
+            Node n = new Node();
+            n.setDigit(h.getDigit());
+            Node next = h.getNext();
+            h.setNext(n);
+            n.setNext(next);
+            h = next;
+        }
+
+        for (Node h = head; h != null; ) {
+            if (h.getRandomNext() != null) {
+                h.getNext().setRandomNext(h.getRandomNext().getNext());
+            }
+            h = h.getNext().getNext();
+        }
+
+        Node ret = head.getNext();
+
+        for (Node h = head, r = ret; h != null; ) {
+            h.setNext(h.getNext().getNext());
+            if (h.getNext() == null) {
+                r.setNext(null);
+            } else {
+                r.setNext(h.getNext().getNext());
+            }
+            h = h.getNext();
+            r = r.getNext();
+        }
+
+        return ret;
+    }
 }
 
 class Node{
     private int digit;
     private Node next = null;
+    private Node randomNext = null;
     public Node setDigit(int n) {
         this.digit = n;
         return this;
@@ -76,10 +124,20 @@ class Node{
         this.next = new Node();
         return this.next;
     }
+    public Node createRandomNext(){
+        this.randomNext = new Node();
+        return this.randomNext;
+    }
     public Node getNext() {
         return this.next;
     }
     public void setNext(Node n) {
         this.next = n;
+    }
+    public Node getRandomNext() {
+        return this.randomNext;
+    }
+    public void setRandomNext(Node n) {
+        this.randomNext = n;
     }
 }

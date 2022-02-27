@@ -133,4 +133,33 @@ class LinkedListProblemsTest {
         }
     }
 
+    @Test
+    @DisplayName("deep copy linked list basic tests")
+    void deepCopyLinkedListBasicTests() {
+        Node head = new Node();
+        head.setDigit(7).createNext().setDigit(14).createNext().setDigit(21);
+        head.setRandomNext(head.getNext().getNext());
+        head.getNext().setRandomNext(null);
+        head.getNext().getNext().setRandomNext(head);
+
+        String nextChainDigits = "71421";
+        String randomChainDigits = "21null7";
+
+        Node result = LinkedListProblems.deepCopyLinkedList(head);
+        String resultNextChainDigits = "";
+        String resultRandomChainDigits = "";
+
+        for(Node h = result; h != null; h = h.getNext()) {
+            resultNextChainDigits+=h.getDigit();
+            if (h.getRandomNext() == null) {
+                resultRandomChainDigits += "null";
+            } else {
+                resultRandomChainDigits += h.getRandomNext().getDigit();
+            }
+        }
+
+        assertEquals(nextChainDigits, resultNextChainDigits);
+        assertEquals(randomChainDigits, resultRandomChainDigits);
+    }
+
 }
