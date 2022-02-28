@@ -107,6 +107,60 @@ public class LinkedListProblems {
 
         return ret;
     }
+
+    /**
+     * <b>6. Merge two sorted linked lists
+     * <br.
+     * Problem Statement:</b> Write a function that takes two sorted linked lists
+     * and merges them. The function should return a single, sorted list made from
+     * splicing the nodes of the first two lists together.
+     *
+     * For example, if the first linked list is 1 -> 2 -> 4 and
+     * the second linked list is 3 -> 5 -> 6, then
+     * the output would be 1 -> 2 -> 3 -> 4 -> 5 -> 6
+     *
+     * @param head1 first linked list
+     * @param head2 second linked list
+     * @return the merged linked list in sorted order
+     */
+    public static Node mergeSortedLinkedLists(Node head1, Node head2) {
+        Node ret = new Node();
+        Node prev = ret;
+        Node h1 = head1, h2 = head2, r = ret;
+
+        for (; h1 != null && h2 != null; ) {
+            if (h1.getDigit() < h2.getDigit()) {
+                r.setDigit(h1.getDigit());
+                h1 = h1.getNext();
+            } else {
+                r.setDigit(h2.getDigit());
+                h2 = h2.getNext();
+            }
+            r.createNext();
+            prev = r;
+            r = r.getNext();
+        }
+
+        Node h = null;
+        if (h1 != null) {
+            h = h1;
+        } else if (h2 != null) {
+            h = h2;
+        } else {
+            prev.setNext(null);
+            return ret;
+        }
+
+        for (r = prev.getNext(); h != null; h = h.getNext()) {
+            r.setDigit(h.getDigit());
+            prev = r;
+            r.createNext();
+            r = r.getNext();
+        }
+
+        prev.setNext(null);
+        return ret;
+    }
 }
 
 class Node{
