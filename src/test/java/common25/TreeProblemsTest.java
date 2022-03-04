@@ -3,16 +3,24 @@ package common25;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TreeProblemsTest {
 
-    TNode createTree(int[] a) {
+    TNode createTree(Integer[] a) {
         TNode root = new TNode(a[0]);
         TNode n = root;
 
         for (int i = 1; i < a.length; i++) {
-            if (a[i] == -1) {
+            if (a[i] == null) {
+                TNode b = new TNode(-2);
+                b.parent = n;
+                n.branches.add(b);
+                n = b;
+            } else if (a[i] == -1) {
                 n = n.parent;
             } else {
                 TNode b = new TNode(a[i]);
@@ -22,33 +30,46 @@ class TreeProblemsTest {
             }
         }
 
+        Queue<TNode> q = new ArrayDeque<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            n = q.remove();
+            for (int i = 0; i < n.branches.size(); i++) {
+                if (n.branches.get(i).digit == -2) {
+                    n.branches.set(i, null);
+                } else {
+                    q.add(n.branches.get(i));
+                }
+            }
+        }
+
         return root;
     }
 
     @Test
     @DisplayName("tree height basic test")
     void treeHeightBasicTest() {
-        int [] a = new int[]{100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350};
+        Integer [] a = new Integer[]{100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350};
         TNode root = createTree(a);
         assertEquals(4, TreeProblems.height(root));
 
-        a = new int[]{1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8};
+        a = new Integer[]{1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8};
         root = createTree(a);
         assertEquals(4, TreeProblems.height(root));
 
-        a = new int[]{1, 2, 3};
+        a = new Integer[]{1, 2, 3};
         root = createTree(a);
         assertEquals(3, TreeProblems.height(root));
 
-        a = new int[]{1, 2, -1, 3, 4};
+        a = new Integer[]{1, 2, -1, 3, 4};
         root = createTree(a);
         assertEquals(3, TreeProblems.height(root));
 
-        a = new int[]{1};
+        a = new Integer[]{1};
         root = createTree(a);
         assertEquals(1, TreeProblems.height(root));
 
-        a = new int[]{1, 2, 3, -1, 4, 5};
+        a = new Integer[]{1, 2, 3, -1, 4, 5};
         root = createTree(a);
         assertEquals(4, TreeProblems.height(root));
     }
@@ -56,32 +77,32 @@ class TreeProblemsTest {
     @Test
     @DisplayName("level order print queue basic test")
     void levelOrderPrintQueueBasicTest() {
-        int [] a = new int[]{100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350};
+        Integer [] a = new Integer[]{100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350};
         TNode root = createTree(a);
         TreeProblems.levelOrderQueueBased(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8};
+        a = new Integer[]{1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8};
         root = createTree(a);
         TreeProblems.levelOrderQueueBased(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, 3};
+        a = new Integer[]{1, 2, 3};
         root = createTree(a);
         TreeProblems.levelOrderQueueBased(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, -1, 3, 4};
+        a = new Integer[]{1, 2, -1, 3, 4};
         root = createTree(a);
         TreeProblems.levelOrderQueueBased(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1};
+        a = new Integer[]{1};
         root = createTree(a);
         TreeProblems.levelOrderQueueBased(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, 3, -1, 4, 5};
+        a = new Integer[]{1, 2, 3, -1, 4, 5};
         root = createTree(a);
         TreeProblems.levelOrderQueueBased(root);
     }
@@ -89,32 +110,32 @@ class TreeProblemsTest {
     @Test
     @DisplayName("level order recursion basic test")
     void levelOrderRecursionBasicTest() {
-        int [] a = new int[]{100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350};
+        Integer [] a = new Integer[]{100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350};
         TNode root = createTree(a);
         TreeProblems.levelOrderRecursion(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8};
+        a = new Integer[]{1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8};
         root = createTree(a);
         TreeProblems.levelOrderRecursion(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, 3};
+        a = new Integer[]{1, 2, 3};
         root = createTree(a);
         TreeProblems.levelOrderRecursion(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, -1, 3, 4};
+        a = new Integer[]{1, 2, -1, 3, 4};
         root = createTree(a);
         TreeProblems.levelOrderRecursion(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1};
+        a = new Integer[]{1};
         root = createTree(a);
         TreeProblems.levelOrderRecursion(root);
         System.out.println("*************************************************");
 
-        a = new int[]{1, 2, 3, -1, 4, 5};
+        a = new Integer[]{1, 2, 3, -1, 4, 5};
         root = createTree(a);
         TreeProblems.levelOrderRecursion(root);
     }
@@ -122,7 +143,7 @@ class TreeProblemsTest {
     @Test
     @DisplayName("connect siblings basic test")
     void connectSiblingsBasicTest() {
-        int [][] a = new int[][]{
+        Integer [][] a = new Integer[][]{
                 {100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350},
                 {1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8},
                 {1, 2, 3},
@@ -149,6 +170,25 @@ class TreeProblemsTest {
                 n = n.sibling;
             }
             assertEquals(siblings[i], s);
+        }
+    }
+
+    @Test
+    @DisplayName("check binary tree symmetry basic test")
+    void checkBinaryTreeSymmetryBasicTest() {
+        Integer [][] a = new Integer[][]{
+                {10,9,8,1,null,-1,null,-1,-1,null,-1,-1,8,null,-1,1,null,-1,null,-1,-1,-1,-1,9,8,1,null,-1,null,-1,-1,null,-1,-1,8,null,-1,1,null,-1,null},
+                {10,9,8,1,null,-1,null,-1,-1,null,-1,-1,8,null,-1,null,-1,-1,-1,9,8,null,-1,null,-1,-1,8,null,-1,1,null,-1,null},
+                {10,9,8,1,null,-1,null,-1,-1,null,-1,-1,8,null,-1,null,-1,-1,-1,9,null,-1,8,null,-1,1,null,-1,null},
+                {8,1,null,-1,null,-1,-1,9,null,-1,8,null,-1,1,null,-1,null}
+        };
+        boolean[] symmetry = new boolean[]{
+                true, true, false, false
+        };
+
+        for (int i = 0; i < a.length; i++) {
+            TNode root = createTree(a[i]);
+            assertEquals(symmetry[i], TreeProblems.isSymmetrical(root));
         }
     }
 
