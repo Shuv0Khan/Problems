@@ -1,6 +1,5 @@
 package common25;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,27 +12,27 @@ class LinkedListProblemsTest {
     @Test
     @DisplayName("sum two linked lists numbers basic test")
     void sumTwoLinkedListsNumbersBasicTest() {
-        Node num1 = new Node();
+        LNode num1 = new LNode();
         num1.setDigit(1).createNext().setDigit(0).createNext().setDigit(9).createNext().setDigit(9);
 
-        Node num2 = new Node();
+        LNode num2 = new LNode();
         num2.setDigit(7).createNext().setDigit(3).createNext().setDigit(2);
 
-        Node result = new Node();
+        LNode result = new LNode();
         result.setDigit(8).createNext().setDigit(3).createNext().setDigit(1).createNext().setDigit(0).createNext().setDigit(1);
 
-        Node ret = LinkedListProblems.sumTwoIntegers(num1, num2);
+        LNode ret = LinkedListProblems.sumTwoIntegers(num1, num2);
         while (ret != null) {
             assertEquals(result.getDigit(), ret.getDigit());
             result = result.getNext();
             ret = ret.getNext();
         }
 
-        num1 = new Node();
+        num1 = new LNode();
         num1.setDigit(9);
-        num2 = new Node();
+        num2 = new LNode();
         num2.setDigit(0);
-        result = new Node();
+        result = new LNode();
         result.setDigit(9);
 
         ret = LinkedListProblems.sumTwoIntegers(num1, num2);
@@ -43,11 +42,11 @@ class LinkedListProblemsTest {
             ret = ret.getNext();
         }
 
-        num1 = new Node();
+        num1 = new LNode();
         num1.setDigit(9);
-        num2 = new Node();
+        num2 = new LNode();
         num2.setDigit(2).createNext().setDigit(1);
-        result = new Node();
+        result = new LNode();
         result.setDigit(1).createNext().setDigit(2);
 
         ret = LinkedListProblems.sumTwoIntegers(num1, num2);
@@ -57,11 +56,11 @@ class LinkedListProblemsTest {
             ret = ret.getNext();
         }
 
-        num1 = new Node();
+        num1 = new LNode();
         num1.setDigit(9);
-        num2 = new Node();
+        num2 = new LNode();
         num2.setDigit(2);
-        result = new Node();
+        result = new LNode();
         result.setDigit(1).createNext().setDigit(1);
 
         ret = LinkedListProblems.sumTwoIntegers(num1, num2);
@@ -71,11 +70,11 @@ class LinkedListProblemsTest {
             ret = ret.getNext();
         }
 
-        num1 = new Node();
+        num1 = new LNode();
         num1.setDigit(9);
-        num2 = new Node();
+        num2 = new LNode();
         num2.setDigit(2).createNext().setDigit(9);
-        result = new Node();
+        result = new LNode();
         result.setDigit(1).createNext().setDigit(0).createNext().setDigit(1);
 
         ret = LinkedListProblems.sumTwoIntegers(num1, num2);
@@ -95,14 +94,14 @@ class LinkedListProblemsTest {
             int n2 = Math.abs(rand.nextInt(100000));
             int sum = n1 + n2;
             System.out.println("n1: "+n1+", n2: "+n2+", sum: "+sum);
-            Node num1 = new Node();
-            Node num2 = new Node();
-            Node result = new Node();
+            LNode num1 = new LNode();
+            LNode num2 = new LNode();
+            LNode result = new LNode();
 
             int n = n1;
             num1.setDigit(n%10);
             n = n/10;
-            Node num = num1;
+            LNode num = num1;
             for (; n > 0;) {
                 num = num.createNext().setDigit(n%10);
                 n = n/10;
@@ -126,7 +125,7 @@ class LinkedListProblemsTest {
                 n = n/10;
             }
 
-            Node ret = LinkedListProblems.sumTwoIntegers(num1, num2);
+            LNode ret = LinkedListProblems.sumTwoIntegers(num1, num2);
             while (ret != null) {
                 assertEquals(result.getDigit(), ret.getDigit());
                 result = result.getNext();
@@ -138,7 +137,7 @@ class LinkedListProblemsTest {
     @Test
     @DisplayName("deep copy linked list basic tests")
     void deepCopyLinkedListBasicTests() {
-        Node head = new Node();
+        LNode head = new LNode();
         head.setDigit(7).createNext().setDigit(14).createNext().setDigit(21);
         head.setRandomNext(head.getNext().getNext());
         head.getNext().setRandomNext(null);
@@ -147,11 +146,11 @@ class LinkedListProblemsTest {
         String nextChainDigits = "71421";
         String randomChainDigits = "21null7";
 
-        Node result = LinkedListProblems.deepCopyLinkedList(head);
+        LNode result = LinkedListProblems.deepCopyLinkedList(head);
         String resultNextChainDigits = "";
         String resultRandomChainDigits = "";
 
-        for(Node h = result; h != null; h = h.getNext()) {
+        for(LNode h = result; h != null; h = h.getNext()) {
             resultNextChainDigits+=h.getDigit();
             if (h.getRandomNext() == null) {
                 resultRandomChainDigits += "null";
@@ -172,11 +171,11 @@ class LinkedListProblemsTest {
             String nextChainDigits = "";
             String randomChainDigits = "";
 
-            Node[] list = new Node[rand.nextInt(10)+10];
-            list[0] = new Node();
+            LNode[] list = new LNode[rand.nextInt(10)+10];
+            list[0] = new LNode();
             for (int j = 0; j < list.length - 1; j++) {
                 list[j].setDigit(rand.nextInt(100));
-                list[j+1] = new Node();
+                list[j+1] = new LNode();
                 list[j].setNext(list[j+1]);
                 nextChainDigits += list[j].getDigit();
             }
@@ -189,11 +188,11 @@ class LinkedListProblemsTest {
             }
             randomChainDigits+="null";
 
-            Node result = LinkedListProblems.deepCopyLinkedList(list[0]);
+            LNode result = LinkedListProblems.deepCopyLinkedList(list[0]);
             String resultNextChainDigits = "";
             String resultRandomChainDigits = "";
 
-            for(Node h = result; h != null; h = h.getNext()) {
+            for(LNode h = result; h != null; h = h.getNext()) {
                 resultNextChainDigits+=h.getDigit();
                 if (h.getRandomNext() == null) {
                     resultRandomChainDigits += "null";
@@ -226,10 +225,10 @@ class LinkedListProblemsTest {
             Arrays.sort(a1);
             Arrays.sort(a2);
 
-            Node head1 = new Node();
-            Node head2 = new Node();
-            Node h = head1;
-            Node prev = null;
+            LNode head1 = new LNode();
+            LNode head2 = new LNode();
+            LNode h = head1;
+            LNode prev = null;
 
             for (int j = 0; j < a1.length; j++) {
                 prev = h;
@@ -245,7 +244,7 @@ class LinkedListProblemsTest {
             }
             prev.setNext(null);
 
-            Node merged = LinkedListProblems.mergeSortedLinkedLists(head1, head2);
+            LNode merged = LinkedListProblems.mergeSortedLinkedLists(head1, head2);
             h = merged;
             while (h.getNext() != null) {
                 if (h.getDigit() > h.getNext().getDigit()) {

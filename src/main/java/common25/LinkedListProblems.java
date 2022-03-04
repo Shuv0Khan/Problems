@@ -23,12 +23,12 @@ public class LinkedListProblems {
      * @param num2 Head of linked list of the second number
      * @return Node - the head of linked list with the sum
      */
-    public static Node sumTwoIntegers(Node num1, Node num2) {
-        Node ret = new Node();
-        Node result = ret;
-        Node prev = null;
-        Node h1 = num1;
-        Node h2 = num2;
+    public static LNode sumTwoIntegers(LNode num1, LNode num2) {
+        LNode ret = new LNode();
+        LNode result = ret;
+        LNode prev = null;
+        LNode h1 = num1;
+        LNode h2 = num2;
         int carry = 0;
         int nullCount = 0;
         while (nullCount != 2) {
@@ -75,26 +75,26 @@ public class LinkedListProblems {
      * @param head the linked list to copy
      * @return head of the copied link list
      */
-    public static Node deepCopyLinkedList(Node head) {
-        for(Node h = head; h != null;) {
-            Node n = new Node();
+    public static LNode deepCopyLinkedList(LNode head) {
+        for(LNode h = head; h != null;) {
+            LNode n = new LNode();
             n.setDigit(h.getDigit());
-            Node next = h.getNext();
+            LNode next = h.getNext();
             h.setNext(n);
             n.setNext(next);
             h = next;
         }
 
-        for (Node h = head; h != null; ) {
+        for (LNode h = head; h != null; ) {
             if (h.getRandomNext() != null) {
                 h.getNext().setRandomNext(h.getRandomNext().getNext());
             }
             h = h.getNext().getNext();
         }
 
-        Node ret = head.getNext();
+        LNode ret = head.getNext();
 
-        for (Node h = head, r = ret; h != null; ) {
+        for (LNode h = head, r = ret; h != null; ) {
             h.setNext(h.getNext().getNext());
             if (h.getNext() == null) {
                 r.setNext(null);
@@ -123,10 +123,10 @@ public class LinkedListProblems {
      * @param head2 second linked list
      * @return the merged linked list in sorted order
      */
-    public static Node mergeSortedLinkedLists(Node head1, Node head2) {
-        Node ret = new Node();
-        Node prev = ret;
-        Node h1 = head1, h2 = head2, r = ret;
+    public static LNode mergeSortedLinkedLists(LNode head1, LNode head2) {
+        LNode ret = new LNode();
+        LNode prev = ret;
+        LNode h1 = head1, h2 = head2, r = ret;
 
         for (; h1 != null && h2 != null; ) {
             if (h1.getDigit() < h2.getDigit()) {
@@ -141,7 +141,7 @@ public class LinkedListProblems {
             r = r.getNext();
         }
 
-        Node h = null;
+        LNode h = null;
         if (h1 != null) {
             h = h1;
         } else if (h2 != null) {
@@ -163,35 +163,35 @@ public class LinkedListProblems {
     }
 }
 
-class Node{
+class LNode {
     private int digit;
-    private Node next = null;
-    private Node randomNext = null;
-    public Node setDigit(int n) {
+    private LNode next = null;
+    private LNode randomNext = null;
+    public LNode setDigit(int n) {
         this.digit = n;
         return this;
     }
     public int getDigit(){
         return this.digit;
     }
-    public Node createNext() {
-        this.next = new Node();
+    public LNode createNext() {
+        this.next = new LNode();
         return this.next;
     }
-    public Node createRandomNext(){
-        this.randomNext = new Node();
+    public LNode createRandomNext(){
+        this.randomNext = new LNode();
         return this.randomNext;
     }
-    public Node getNext() {
+    public LNode getNext() {
         return this.next;
     }
-    public void setNext(Node n) {
+    public void setNext(LNode n) {
         this.next = n;
     }
-    public Node getRandomNext() {
+    public LNode getRandomNext() {
         return this.randomNext;
     }
-    public void setRandomNext(Node n) {
+    public void setRandomNext(LNode n) {
         this.randomNext = n;
     }
 }
