@@ -78,11 +78,27 @@ public class TreeProblems {
             printLevel(n.branches.get(i), level - 1);
         }
     }
+
+    public static TNode connectSiblings(TNode root) {
+        Queue<TNode> q = new ArrayDeque<>();
+        q.add(root);
+
+        while (!q.isEmpty()) {
+            TNode n = q.remove();
+            for (int i = 0, l = n.branches.size(); i < l; i++) {
+                q.add(n.branches.get(i));
+            }
+            n.sibling = q.peek();
+        }
+
+        return root;
+    }
 }
 
 class TNode{
     int digit = 0;
     TNode parent = null;
+    TNode sibling = null;
     ArrayList<TNode> branches = new ArrayList<>();
     public TNode(int d) {
         this.digit = d;

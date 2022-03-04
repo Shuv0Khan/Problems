@@ -119,4 +119,37 @@ class TreeProblemsTest {
         TreeProblems.levelOrderRecursion(root);
     }
 
+    @Test
+    @DisplayName("connect siblings basic test")
+    void connectSiblingsBasicTest() {
+        int [][] a = new int[][]{
+                {100, 50, 25, 27, -1, -1, 75, -1, -1, 200, 350},
+                {1, 2, 5, -1, -1, 3, -1, 4, 6, -1, 7, 8},
+                {1, 2, 3},
+                {1, 2, -1, 3, 4},
+                {1},
+                {1, 2, 3, -1, 4, 5}
+        };
+        String[] siblings = new String[]{
+                "10050200257535027",
+                "12345678",
+                "123",
+                "1234",
+                "1",
+                "12345"
+        };
+
+        for (int i = 0; i < a.length; i++) {
+            TNode root = createTree(a[i]);
+            TNode ret = TreeProblems.connectSiblings(root);
+            TNode n = ret;
+            String s = "";
+            while (n != null) {
+                s += n.digit;
+                n = n.sibling;
+            }
+            assertEquals(siblings[i], s);
+        }
+    }
+
 }
