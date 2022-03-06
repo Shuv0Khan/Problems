@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StringProblemsTest {
     @Test
@@ -112,6 +111,35 @@ class StringProblemsTest {
             assertTrue(returns2.contains(p));
         }
 
+    }
+
+    @Test
+    @DisplayName("word break basic test")
+    void wordBreakBasicTest() {
+        List<String> dict = Arrays.asList(
+                "i", "like", "samsung", "apple", "pen", "cat", "ball",
+                "cats", "smoke", "and", "man", "go", "mango");
+
+        String s = "ilikesamsung";
+        assertTrue(StringProblems.wordBreak(s, dict));
+
+        s = "iiiiiiii";
+        assertTrue(StringProblems.wordBreak(s, dict));
+
+        s = "";
+        assertTrue(StringProblems.wordBreak(s, dict));
+
+        s = "samsungandmango";
+        assertTrue(StringProblems.wordBreak(s, dict));
+
+        s = "applepenapple";
+        assertTrue(StringProblems.wordBreak(s, dict));
+
+        s = "samsungandmangok";
+        assertFalse(StringProblems.wordBreak(s, dict));
+
+        s = "appleandp";
+        assertFalse(StringProblems.wordBreak(s, dict));
     }
 
 }

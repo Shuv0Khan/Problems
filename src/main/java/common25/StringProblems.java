@@ -2,6 +2,7 @@ package common25;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -164,5 +165,32 @@ public class StringProblems {
         for (; left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right); left--, right++) {
             palindromes.add(s.substring(left, right + 1));
         }
+    }
+
+    /**
+     * <b>12. String segmentation
+     * <br>
+     * Problem Statement:</b> Given a dictionary of words and a large input string,
+     * find whether or not the input string can be completely segmented
+     * into the words of that dictionary.
+     * @param s the string to segment
+     * @param dict the list of possible words
+     * @return true if full segmentation possible, false otherwise
+     */
+    public static boolean wordBreak(String s, List<String> dict) {
+        Set<String> d = new HashSet<>(dict); // to remove O(n) check time for checking word
+
+        int [] dp = new int[s.length()+1];
+        dp[0] = 1;
+
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] == 1 && d.contains(s.substring(j, i))) {
+                    dp[i] = 1;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()] == 1;
     }
 }
