@@ -142,4 +142,21 @@ class StringProblemsTest {
         assertFalse(StringProblems.wordBreak(s, dict));
     }
 
+    @Test
+    @DisplayName("find all possible word breaks basic test")
+    void findAllPossibleWordBreaksBasicTest() {
+        List<String> dict = Arrays.asList("i", "love", "ice", "cream", "icecream", "and", "man", "go", "mango");
+        String s = "iloveicecreamandmango";
+        List<String> sentences = Arrays.asList(
+                "i love ice cream and man go",
+                "i love ice cream and mango",
+                "i love icecream and man go",
+                "i love icecream and mango"
+        );
+        List<String> resutl = StringProblems.allPossibleWordBreaks(s, dict);
+
+        for (String seg : sentences) {
+            assertTrue(resutl.contains(seg));
+        }
+    }
 }

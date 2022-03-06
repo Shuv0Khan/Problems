@@ -193,4 +193,34 @@ public class StringProblems {
         }
         return dp[s.length()] == 1;
     }
+
+    /**
+     * <b>Extension of Word Break</b><br>
+     * Given a valid sentence without any spaces between the words and a
+     * dictionary of valid English words, find all possible ways to break
+     * the sentence into individual dictionary words.
+     * @param s the given string
+     * @param dict words in valid dictionary
+     * @return list of all valid sentences
+     */
+    public static List<String> allPossibleWordBreaks(String s, List<String> dict) {
+        Set<String> d = new HashSet<>(dict);
+        ArrayList<String> sentences = new ArrayList<>();
+        findAll(s, 0, "", sentences, d);
+        return sentences;
+    }
+
+    private static void findAll(String s, int start, String result, ArrayList<String> sentences, Set<String> dict) {
+        for (int i = start; i <= s.length(); i++) {
+            String prefix = s.substring(start, i);
+            if (dict.contains(prefix)) {
+                if (i == s.length()) {
+                    result += prefix;
+                    sentences.add(result);
+                    return;
+                }
+                findAll(s, i, result+prefix+" ", sentences, dict);
+            }
+        }
+    }
 }
