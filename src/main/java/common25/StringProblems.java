@@ -12,6 +12,10 @@ import java.util.Set;
  * Problem 10 -
  *      1. Beware of nested loops when using looping variables
  *      from the outer loop used in the inner loop.
+ *
+ * problem 12 -
+ *      1. Sometimes I can get really close to the best solution,
+ *      but it's better to look up the solution if stuck for a loooong time.
  */
 public class StringProblems {
     /**
