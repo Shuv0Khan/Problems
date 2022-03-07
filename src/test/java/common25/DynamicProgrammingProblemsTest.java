@@ -16,6 +16,10 @@ class DynamicProgrammingProblemsTest {
         stockPrices = new int[]{8, 5, 4, 2, 1};
         buySellPrices = new int[]{2, 1};
         assertArrayEquals(buySellPrices, DynamicProgrammingProblems.maxSingleSellProfit(stockPrices));
+
+        stockPrices = new int[]{1};
+        buySellPrices = new int[]{0, 0};
+        assertArrayEquals(buySellPrices, DynamicProgrammingProblems.maxSingleSellProfit(stockPrices));
     }
 
     @Test
@@ -26,5 +30,24 @@ class DynamicProgrammingProblemsTest {
 
         stockPrices = new int[]{8, 5, 4, 2, 1};
         assertEquals(0, DynamicProgrammingProblems.maximumMultiSellProfit(stockPrices));
+
+        stockPrices = new int[]{1};
+        assertEquals(0, DynamicProgrammingProblems.maximumMultiSellProfit(stockPrices));
+    }
+
+    @Test
+    @DisplayName("longest increasing subsequence basic test")
+    void longestIncreasingSubsequenceBasicTest() {
+        int [] stockPrices = new int[]{8, 5, 7, 9, 19, 1};
+        assertEquals(4, DynamicProgrammingProblems.longestSubSequence(stockPrices));
+
+        stockPrices = new int[]{8, 5, 4, 2, 1};
+        assertEquals(0, DynamicProgrammingProblems.longestSubSequence(stockPrices));
+
+        stockPrices = new int[]{1, 2, 3, 4, 5};
+        assertEquals(stockPrices.length, DynamicProgrammingProblems.longestSubSequence(stockPrices));
+
+        stockPrices = new int[]{1};
+        assertEquals(0, DynamicProgrammingProblems.longestSubSequence(stockPrices));
     }
 }

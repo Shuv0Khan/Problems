@@ -18,6 +18,10 @@ public class DynamicProgrammingProblems {
      * @return array of buy and sell prices for maximum profit/ minimum loss
      */
     public static int[] maxSingleSellProfit(int[] stockPrices) {
+        if (stockPrices.length < 2) {
+            return new int[]{0, 0};
+        }
+
         int maxProfit = Integer.MIN_VALUE;
         int minPriceAt = 0;
         int buy = 0, sell = 0;
@@ -47,6 +51,9 @@ public class DynamicProgrammingProblems {
      * @return maximum multiple buy-sell profit, 0 if no profit can be made
      */
     public static int maximumMultiSellProfit(int [] stockPrices) {
+        if (stockPrices.length < 2) {
+            return 0;
+        }
         int profit = 0;
         for (int i = 1; i < stockPrices.length; i++) {
             if (stockPrices[i] > stockPrices[i - 1]) {
@@ -54,5 +61,34 @@ public class DynamicProgrammingProblems {
             }
         }
         return profit;
+    }
+
+    /**
+     * <b>13. Length of longest subsequence
+     * <br>
+     * Problem Statement:</b> Given a one-dimensional integer array a of length n,
+     * find the length of the longest subsequence that increases before decreasing.
+     * @param seq list of integers
+     * @return length of the longest increasing subsequence
+     */
+    public static int longestSubSequence(int[] seq) {
+        if (seq.length < 2) {
+            return 0;
+        }
+        int currentLen = 0;
+        int maxLen = 0;
+
+        for (int i = 1; i < seq.length; i++) {
+            if (seq[i] > seq[i - 1]) {
+                currentLen++;
+            } else {
+                currentLen = 0;
+            }
+            if (currentLen > maxLen) {
+                maxLen = currentLen;
+            }
+        }
+
+        return maxLen > 0 ? maxLen + 1: maxLen;
     }
 }
