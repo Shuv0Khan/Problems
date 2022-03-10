@@ -4,7 +4,9 @@ package common25;
  * Source - https://www.educative.io/blog/microsoft-interview-coding-questions
  *
  * Learnings -
- *      problem
+ *      problem 14 -
+ *      1. DP complexity can be guessed based on how many times the value
+ *      of each cell is calculated.
  */
 public class DynamicProgrammingProblems {
     /**
@@ -90,5 +92,56 @@ public class DynamicProgrammingProblems {
         }
 
         return maxLen > 0 ? maxLen + 1: maxLen;
+    }
+
+    /**
+     * <b>14. Find the longest path in a given matrix
+     * <br>
+     * Problem Statement:</b> Given an n*n matrix where all numbers are distinct,
+     * find the longest path starting from any cell such that all cells
+     * along the path increase in order by 1.
+     * @param mat the matrix of integers
+     * @return longest increasing path
+     */
+    public static int longestPath(int[][] mat) {
+        int[][] dp = new int[mat.length][mat[0].length];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                dp[i][j] = -1;
+            }
+        }
+        int maxLen = 0;
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                if (dp[i][j] == -1) {
+                    findPath(mat, i, j, dp);
+                }
+                maxLen = Math.max(maxLen, dp[i][j]);
+            }
+        }
+        return maxLen + 1;
+    }
+
+    private static int findPath(int[][] mat, int row, int col, int[][] dp) {
+        if (dp[row][col] != -1) {
+            return dp[row][col];
+        }
+        int pathLen = 0;
+        int val = mat[row][col];
+
+        if (row > 0 && val < mat[row - 1][col]) {
+            pathLen = Math.max(pathLen, findPath(mat, row - 1, col, dp) + 1);
+        }
+        if (row + 1 < mat.length && val < mat[row + 1][col]) {
+            pathLen = Math.max(pathLen, findPath(mat, row + 1, col, dp) + 1);
+        }
+        if (col > 0 && val < mat[row][col - 1]) {
+            pathLen = Math.max(pathLen, findPath(mat, row, col - 1, dp) + 1);
+        }
+        if (col + 1 < mat[0].length && val < mat[row][col + 1]) {
+            pathLen = Math.max(pathLen, findPath(mat, row, col + 1, dp) + 1);
+        }
+        dp[row][col] = pathLen;
+        return pathLen;
     }
 }

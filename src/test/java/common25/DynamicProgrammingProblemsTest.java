@@ -50,4 +50,36 @@ class DynamicProgrammingProblemsTest {
         stockPrices = new int[]{1};
         assertEquals(0, DynamicProgrammingProblems.longestSubSequence(stockPrices));
     }
+
+    @Test
+    @DisplayName("longest increasing path in a matrix basic test")
+    void longestIncreasingPathInAMatrixBasicTest() {
+        int [][] mat = new int[][]{
+                {9, 9, 4},
+                {6, 6, 8},
+                {2, 1, 1}
+        };
+        assertEquals(4, DynamicProgrammingProblems.longestPath(mat));
+
+        mat = new int[][]{
+                {3, 4, 5},
+                {3, 2, 6},
+                {2, 2, 1}
+        };
+        assertEquals(4, DynamicProgrammingProblems.longestPath(mat));
+
+        mat = new int[][]{
+                {1, 6, 4},
+                {9, 2, 7},
+                {5, 8, 3}
+        };
+        assertEquals(2, DynamicProgrammingProblems.longestPath(mat));
+
+        mat = new int[][]{
+                {9, 8, 7},
+                {4, 5, 6},
+                {3, 2, 1}
+        };
+        assertEquals(9, DynamicProgrammingProblems.longestPath(mat));
+    }
 }
