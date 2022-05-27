@@ -114,6 +114,47 @@ public class BacktrackingProblems {
         }
         return null;
     }
+
+    /**
+     * <b>19. Rat in a Maze
+     * <br>
+     * Problem Statement:</b> Consider a rat placed in a square n*n matrix
+     * at position (0, 0). Find all possible paths the rat can take to reach
+     * its destination (N-1, N-1) from its starting position.
+     *<br>
+     * The rat can move vertically and horizontally. Cells with a value of 1
+     * can be traversed, while cells with a value of 0 cannot.
+     * The rat cannot visit a cell more than once.
+     * @param maze
+     * @return
+     */
+    public static int mazeTraversal(int[][] maze) {
+        int[][] visits = new int[maze.length][maze[0].length];
+        return dfsMaze(maze, 0, 0, visits);
+    }
+
+    private static int dfsMaze(int[][] nodes, int curRow, int curCol, int[][] visits) {
+        if (curRow == nodes.length - 1 && curCol == nodes[0].length - 1) {
+            return 1;
+        }
+        visits[curRow][curCol] = 1;
+        int paths = 0;
+        if (curRow > 0 && nodes[curRow - 1][curCol] == 1 && visits[curRow - 1][curCol] == 0) {
+            paths += dfsMaze(nodes, curRow - 1, curCol, visits);
+        }
+        if (curCol > 0 && nodes[curRow][curCol - 1] == 1 && visits[curRow][curCol - 1] == 0) {
+            paths += dfsMaze(nodes, curRow, curCol - 1, visits);
+        }
+        if (curRow + 1 < nodes.length && nodes[curRow + 1][curCol] == 1 && visits[curRow + 1][curCol] == 0) {
+            paths += dfsMaze(nodes, curRow + 1, curCol, visits);
+        }
+        if (curCol + 1 < nodes[0].length  && nodes[curRow][curCol + 1] == 1 && visits[curRow][curCol + 1] == 0) {
+            paths += dfsMaze(nodes, curRow, curCol + 1, visits);
+        }
+
+        visits[curRow][curCol] = 0;
+        return paths;
+    }
 }
 
 class State{
@@ -138,9 +179,4 @@ class State{
         }
         return states;
     }
-
-    /*private void addSorted(ArrayList<State> states, State S) {
-        int i = 0;
-        for (; i < states.size() && states.get(i).state < S.state; i++);
-    }*/
 }
