@@ -1,9 +1,6 @@
 package leetcode.Algorithms;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * https://leetcode.com/problems/permutation-in-string/

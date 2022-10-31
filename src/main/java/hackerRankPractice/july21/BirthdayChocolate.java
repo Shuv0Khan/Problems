@@ -1,7 +1,6 @@
 package hackerRankPractice.july21;/*https://www.hackerrank.com/challenges/the-birthday-bar/problem*/
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 

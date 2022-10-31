@@ -1,9 +1,5 @@
 package hackerRankPractice.july21;/*https://www.hackerrank.com/challenges/drawing-book/problem*/
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 public class DrawingBook {
 
     /*

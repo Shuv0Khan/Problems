@@ -1,8 +1,5 @@
 package hackerRankPractice.july21;
 
-import java.util.Arrays;
-import java.util.Map;
-
 /**
  * @author shuvo
  * @since 13/07/2021
