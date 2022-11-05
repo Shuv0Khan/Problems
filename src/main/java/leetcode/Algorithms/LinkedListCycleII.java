@@ -46,7 +46,7 @@ public class LinkedListCycleII {
 
     /**
      * https://leetcode.com/problems/linked-list-cycle-ii/solutions/1701128/c-java-python-slow-and-fast-image-explanation-beginner-friendly/
-     * 
+     *
      * Slow Fast method. Slow moves one step at a time. Fast moves two steps at a time.
      * They meet on the cycle. The number of steps slow travelled is a multiple of
      * number of cycles travelled by fast.
