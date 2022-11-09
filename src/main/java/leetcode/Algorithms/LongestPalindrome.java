@@ -1,5 +1,7 @@
 package leetcode.Algorithms;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class LongestPalindrome {
@@ -24,8 +26,6 @@ public class LongestPalindrome {
                 longestLength = len;
             }
         }
-        HashMap<Character, Integer> c = new HashMap<>();
-        for (Character ch : c.)
         return longestLength;
     }
 }

@@ -1,8 +1,6 @@
 package common25;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Source - https://www.educative.io/blog/microsoft-interview-coding-questions
@@ -154,14 +152,38 @@ public class TreeProblems {
             return Integer.toString(n.digit);
         }
     }
-}
 
-class TNode{
-    int digit = 0;
-    TNode parent = null;
-    TNode sibling = null;
-    ArrayList<TNode> branches = new ArrayList<>();
-    public TNode(int d) {
-        this.digit = d;
+    /**
+     * Iterative traversal of BST with stack
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversalBST(TNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root == null) return list;
+        Stack<TNode> stack = new Stack<>();
+        while(root != null || !stack.empty()){
+            while(root != null){
+                stack.push(root);
+                root = (root.branches.size() == 0)? null : root.branches.get(0);
+            }
+            root = stack.pop();
+            list.add(root.digit);
+            root = (root.branches.size() == 0)? null : root.branches.get(1);
+
+        }
+        return list;
+    }
+
+    public static class TNode{
+        public int digit = 0;
+        public TNode parent = null;
+        public TNode sibling = null;
+        public ArrayList<TNode> branches = new ArrayList<>();
+        public TNode(int d) {
+            this.digit = d;
+        }
     }
 }
+
+
