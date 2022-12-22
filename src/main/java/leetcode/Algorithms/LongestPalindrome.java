@@ -1,9 +1,5 @@
 package leetcode.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 public class LongestPalindrome {
     public static int longestPalindrome(String s) {
         int longestLength = 0;
